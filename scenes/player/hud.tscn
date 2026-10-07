@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://brwl4xjc7v7ip"]
+
+[ext_resource type="Script" uid="uid://be0ox3omg3xgy" path="res://scenes/player/health_bar.gd" id="1_5bwha"]
+[ext_resource type="Script" uid="uid://bkokb00t50y8m" path="res://scenes/player/stamina_bar.gd" id="2_xivtj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhunq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riqys"]
+bg_color = Color(0.8784314, 0.050980393, 0.043137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr0ht"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27450982)
+shadow_offset = Vector2(1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r0jt"]
+bg_color = Color(0.3693258, 0.0066723903, 0.0058604726, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sn0t7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6f8o3"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1esiv"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+shadow_offset = Vector2(1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvofd"]
+bg_color = Color(0.3489835, 0.3489835, 1.92523e-07, 1)
+
+[node name="Hud" type="CanvasLayer" unique_id=1910950245]
+
+[node name="healthBar" type="ProgressBar" parent="." unique_id=381307692 groups=["health_bar"]]
+z_index = 10
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -10.0
+offset_right = 230.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxEmpty_bhunq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_riqys")
+value = 60.0
+show_percentage = false
+script = ExtResource("1_5bwha")
+
+[node name="damageBar" type="ProgressBar" parent="healthBar" unique_id=1805707494]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_qr0ht")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2r0jt")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="healthBar" unique_id=104315678]
+wait_time = 0.4
+one_shot = true
+
+[node name="staminaBar" type="ProgressBar" parent="." unique_id=1026562560 groups=["stamina_bar"]]
+z_index = 10
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -10.0
+offset_right = 298.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxEmpty_sn0t7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6f8o3")
+value = 60.0
+show_percentage = false
+script = ExtResource("2_xivtj")
+
+[node name="usageBar" type="ProgressBar" parent="staminaBar" unique_id=2019400051]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1esiv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xvofd")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="staminaBar" unique_id=166120298]
+wait_time = 0.4
+one_shot = true
+
+[node name="UI" type="Control" parent="." unique_id=1590451646]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HitRect" type="ColorRect" parent="UI" unique_id=1803182128]
+visible = false
+layout_mode = 0
+offset_left = -65.0
+offset_top = -31.0
+offset_right = 1214.0
+offset_bottom = 692.0
+color = Color(0.44313726, 0, 0.1254902, 0.2784314)
+
+[connection signal="timeout" from="healthBar/Timer" to="healthBar" method="_on_timer_timeout"]
+[connection signal="timeout" from="staminaBar/Timer" to="healthBar" method="_on_timer_timeout"]

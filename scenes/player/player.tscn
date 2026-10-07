@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bsug6xx2vce26"]
+
+[ext_resource type="Script" uid="uid://tek86xthi067" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="PackedScene" uid="uid://cch5h8237bm2l" path="res://scenes/player/gun.tscn" id="2_dovo2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bhunq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jo4qc"]
+
+[node name="Player" type="CharacterBody3D" unique_id=429573345 groups=["player"]]
+script = ExtResource("1_8afob")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=156103807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013763607, 0.005030513, 0.0027184486)
+mesh = SubResource("CapsuleMesh_bhunq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=427708878]
+shape = SubResource("CapsuleShape3D_jo4qc")
+
+[node name="Head" type="Node3D" parent="." unique_id=182587865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58189833, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1197728924]
+
+[node name="gun" parent="Head/Camera3D" unique_id=1225715396 instance=ExtResource("2_dovo2")]
+transform = Transform3D(0.99467516, 0, 0.10306135, 0, 1, 0, -0.10306135, 0, 0.99467516, 0.5376406, -0.40597504, -0.7550986)
